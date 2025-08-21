@@ -6,4 +6,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface FuncionarioRepository extends JpaRepository<Funcionario, Long> {
+    boolean existsFuncionarioByCpf(String cpf);
+
+    void deleteByCpf(String cpf);
 }
