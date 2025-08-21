@@ -3,6 +3,7 @@ package com.poo.projeto.crud.service;
 import com.poo.projeto.crud.model.Funcionario;
 import com.poo.projeto.crud.repository.FuncionarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -25,8 +26,8 @@ public class FuncionarioService {
     public Funcionario cadastrarFuncionario(Funcionario funcionario){
         try{
             return repository.save(funcionario);
-        }catch (Exception e){
-            throw new RuntimeException("Erro ao cadastrar funcionaŕio!");
+        }catch (DataIntegrityViolationException e){
+            throw new IllegalArgumentException("O Funcionário " + funcionario.getNome() + " - " + funcionario.getMatricula() + " já está cadastrado.");
         }
     }
 
