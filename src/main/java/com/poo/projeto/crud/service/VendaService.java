@@ -53,11 +53,7 @@ public class VendaService {
             produtoRepository.save(produto);
         }
 
-        try{
-            return vendaRepository.save(venda);
-        }catch (Exception e){
-            throw new RuntimeException("Erro ao Cadastrar a venda.");
-        }
+        return vendaRepository.save(venda);
     }
 
     @Transactional
