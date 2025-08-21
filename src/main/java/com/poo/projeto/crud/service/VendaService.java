@@ -5,6 +5,7 @@ import com.poo.projeto.crud.model.Venda;
 import com.poo.projeto.crud.model.Produto;
 import com.poo.projeto.crud.repository.ProdutoRepository;
 import com.poo.projeto.crud.repository.VendaRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,7 +24,7 @@ public class VendaService {
         try {
             return vendaRepository.findAll();
         }catch (Exception e){
-            throw new RuntimeException("Erro ao listar Vendas");
+            throw new RuntimeException("Erro ao listar as vendas.");
         }
     }
 
@@ -32,10 +33,11 @@ public class VendaService {
                 .orElseThrow( () -> new RuntimeException("Venda não encontrada!"));
     }
 
+    @Transactional
     public Venda cadastrarVenda(Venda venda) {
 
         if(venda.getFuncionario() == null){
-            throw new IllegalArgumentException("A venda precisa ter um funcionário associado");
+            throw new IllegalArgumentException("A venda precisa ter um funcionário associado.");
         }
 
         for(ItemVenda item : venda.getItens()){
@@ -45,7 +47,7 @@ public class VendaService {
                     .orElseThrow(() -> new RuntimeException("Produto não foi encontrado!"));
 
             if(produto.getEstoque() < item.getQuantidade()){
-                throw new RuntimeException("Estoque insuficiente para: " + produto.getNome() + ", O estoque atual é de "+ produto.getEstoque() + "itens.");
+                throw new RuntimeException("Estoque insuficiente para: " + produto.getNome() + ", O estoque atual é de " + produto.getEstoque() + "itens.");
             }
             produto.setEstoque(produto.getEstoque() - item.getQuantidade());
             produtoRepository.save(produto);
@@ -73,7 +75,7 @@ public class VendaService {
             return vendaRepository.save(venda);
         }
         else {
-            throw new RuntimeException("Erro ao Atualizar o produto!");
+            throw new RuntimeException("Erro ao atualizar!");
         }
     }
 
