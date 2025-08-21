@@ -60,13 +60,7 @@ public class VendaService {
         }
     }
 
-    public void deletarVenda(Long id){
-        if(!vendaRepository.existsById(id)){
-            throw new RuntimeException("Venda não encontrada!");
-        }
-        vendaRepository.deleteById(id);
-    }
-
+    @Transactional
     public Venda atualizarVenda(Venda venda){
         Optional<Venda> optionalVenda = vendaRepository.findById(venda.getCodigo());
         if(optionalVenda.isPresent()){
@@ -77,6 +71,13 @@ public class VendaService {
         else {
             throw new RuntimeException("Erro ao atualizar!");
         }
+    }
+
+    public void deletarVenda(Long id){
+        if(!vendaRepository.existsById(id)){
+            throw new RuntimeException("Venda não encontrada!");
+        }
+        vendaRepository.deleteById(id);
     }
 
 

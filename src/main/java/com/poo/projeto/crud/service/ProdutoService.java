@@ -2,6 +2,7 @@ package com.poo.projeto.crud.service;
 
 import com.poo.projeto.crud.model.Produto;
 import com.poo.projeto.crud.repository.ProdutoRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,14 +24,16 @@ public class ProdutoService {
                 .orElseThrow( () -> new RuntimeException("Produto não encontrado!"));
     }
 
+    @Transactional
     public Produto salvarProduto(Produto produto) {
-        try{
-            return produtoRepository.save(produto);
-        }catch (Exception e){
-            throw new RuntimeException("Erro ao salvar o produto!");
+        if(produto.getCodigo() != null){
+            throw new IllegalArgumentException("Esse produto já está cadastrado.");
         }
+
+        return produtoRepository.save(produto);
     }
 
+    @Transactional
     public Produto atualizarProduto(Produto produto) {
         Optional<Produto> optionalProduto = produtoRepository.findById(produto.getCodigo());
         if(optionalProduto.isPresent()){

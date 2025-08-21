@@ -15,11 +15,7 @@ public class FuncionarioService {
     FuncionarioRepository repository;
 
     public List<Funcionario> listarFuncionarios() {
-        try{
-            return repository.findAll();
-        }catch (Exception e){
-            throw new RuntimeException("Erro ao listar funcionarios!");
-        }
+        return repository.findAll();
     }
 
     public Funcionario buscarFuncionarioPorId(Long id) {
