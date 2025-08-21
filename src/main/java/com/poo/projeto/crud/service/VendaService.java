@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class VendaService {
@@ -27,8 +28,33 @@ public class VendaService {
     }
 
     public Venda cadastrarVenda(Venda venda) {
-        return repository.save(venda);
+        try{
+            return repository.save(venda);
+        }catch (Exception e){
+            throw new RuntimeException("Erro ao Cadastrar a venda.");
+        }
+
     }
+
+    public void deletarVenda(Long id){
+        if(!repository.existsById(id)){
+            throw new RuntimeException("Venda não encontrada!");
+        }
+        repository.deleteById(id);
+    }
+
+    public Venda atualizarVenda(Venda venda){
+        Optional<Venda> optionalVenda = repository.findById(venda.getCodigo());
+        if(optionalVenda.isPresent()){
+            Venda vendaAtualizada = optionalVenda.get();
+            vendaAtualizada.setItens(venda.getItens());
+            return repository.save(venda);
+        }
+        else {
+            throw new RuntimeException("Erro ao Atualizar o produto!");
+        }
+    }
+
 
 
 

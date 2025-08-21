@@ -17,7 +17,7 @@ import java.util.List;
 public class Venda {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String codigo;
+    private Long codigo;
     private LocalDate dataVenda;
 
     @ManyToOne
