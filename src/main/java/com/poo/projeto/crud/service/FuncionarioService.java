@@ -17,13 +17,24 @@ public class FuncionarioService {
         try{
             return repository.findAll();
         }catch (Exception e){
-            throw new RuntimeException("Erro ao listar funcionarios");
+            throw new RuntimeException("Erro ao listar funcionarios!");
         }
     }
 
     public Funcionario buscarFuncionarioPorId(Long id) {
-        return repository.findById(id).orElseThrow(() -> new RuntimeException("Funcionário não encontrado."));
+        return repository.findById(id).orElseThrow(() -> new RuntimeException("Funcionário não encontrado!"));
     }
+
+    public Funcionario cadastrarFuncionario(Funcionario funcionario){
+        try{
+            return repository.save(funcionario);
+        }catch (Exception e){
+            throw new RuntimeException("Erro ao cadastrar funcionaŕio!");
+        }
+    }
+
+
+
 
 
 
