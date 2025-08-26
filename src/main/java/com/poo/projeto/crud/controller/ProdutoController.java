@@ -73,6 +73,23 @@ public class ProdutoController {
         }
     }
 
+    private void deletarProduto() {
+        try {
+            int selectedRow = view.getTabelaProdutos().getSelectedRow();
+            if (selectedRow == -1) {
+                JOptionPane.showMessageDialog(view, "Selecione um produto para deletar.");
+                return;
+            }
+            Long id = (Long) view.getTableModel().getValueAt(selectedRow, 0);
+            produtoService.deletarProduto(id);
+            carregarTabela();
+            limparCampos();
+            JOptionPane.showMessageDialog(view, "Produto deletado com sucesso!");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(view, "Erro ao deletar o produto: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
 }
 
 
