@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class VendaController {
-    //------ Cria Classe VendaControlle e realiza configurações iniciais"
+
     private final VendaView view;
     private final VendaService vendaService;
     private final FuncionarioService funcionarioService;
@@ -25,4 +25,21 @@ public class VendaController {
     private List<Funcionario> funcionarios;
     private List<Produto> produtos;
     private List<ItemVenda> itensDaVendaAtual = new ArrayList<>();
+
+
+    public VendaController(VendaView view, VendaService vendaService, FuncionarioService funcionarioService, ProdutoService produtoService) {
+        this.view = view;
+        this.vendaService = vendaService;
+        this.funcionarioService = funcionarioService;
+        this.produtoService = produtoService;
+
+        this.view.addSalvarVendaListener(e -> salvarVenda());
+        this.view.addAdicionarItemListener(e -> adicionarItem());
+
+        carregarDadosIniciais();
+        atualizarTotal();
+    }
+
+
+
 }
