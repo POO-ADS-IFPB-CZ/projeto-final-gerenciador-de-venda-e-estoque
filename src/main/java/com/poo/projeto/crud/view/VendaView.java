@@ -62,8 +62,16 @@ public class VendaView extends JFrame {
         add(totalPanel, BorderLayout.SOUTH);
 
 
-
     }
+
+    public JComboBox<String> getComboFuncionario() { return comboFuncionario; }
+    public JComboBox<String> getComboProduto() { return comboProduto; }
+    public JTextField getTxtQuantidade() { return txtQuantidade; }
+    public DefaultTableModel getItensTableModel() { return itensTableModel; }
+    public JLabel getLblTotal() { return lblTotal; }
+
+    public void addSalvarVendaListener(ActionListener listener) { btnSalvarVenda.addActionListener(listener); }
+    public void addAdicionarItemListener(ActionListener listener) { btnAdicionarItem.addActionListener(listener); }
 
 }
 
