@@ -3,6 +3,7 @@ package com.poo.projeto.crud.view;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
+import java.awt.event.ActionListener;
 
 public class FuncionarioView {
 
@@ -59,5 +60,18 @@ public class FuncionarioView {
 
     }
 
+    public JTextField getTxtId() { return txtId; }
+    public JTextField getTxtNome() { return txtNome; }
+    public JTextField getTxtCPF() { return txtCPF;}
+    public JTextField getTxtMatricula() { return txtMatricula;}
+    public JTextField getTxtCargo() { return txtCargo; }
+    public JTextField getTxtSalario() { return txtSalario; }
+    public DefaultTableModel getTableModel() { return tableModel; }
+    public JTable getTabelaFuncionarios() { return tabelaFuncionarios; }
+
+    public void addSalvarListener(ActionListener listener) { btnSalvar.addActionListener(listener); }
+    public void addAtualizarListener(ActionListener listener) { btnAtualizar.addActionListener(listener); }
+    public void addDeletarListener(ActionListener listener) { btnDeletar.addActionListener(listener); }
+    public void addLimparListener(ActionListener listener) { btnLimpar.addActionListener(listener); }
 
 }
