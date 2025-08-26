@@ -53,9 +53,8 @@ public class VendaService {
             produto.setEstoque(produto.getEstoque() - item.getQuantidade());
             produtoRepository.save(produto);
 
-            total = item.getPrecoUnitario() * item.getQuantidade();
+            total += item.getPrecoUnitario() * item.getQuantidade();
         }
-
         venda.setValorTotal(total);
         venda.setDataVenda(LocalDate.now());
 

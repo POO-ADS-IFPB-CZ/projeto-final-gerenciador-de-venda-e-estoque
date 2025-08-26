@@ -28,7 +28,7 @@ public class CrudApplication {
         SwingUtilities.invokeLater(() -> {
             JFrame mainFrame = new JFrame("Bem vindo!");
             mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            mainFrame.setSize(400, 300);git
+            mainFrame.setSize(400, 300);
             mainFrame.setLocationRelativeTo(null);
 
             JPanel panel = new JPanel();
