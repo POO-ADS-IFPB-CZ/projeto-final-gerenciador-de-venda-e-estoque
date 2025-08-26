@@ -110,5 +110,19 @@ public class FuncionarioController {
         view.getTxtMatricula().setEditable(true);
     }
 
+    private void preencherCamposComSelecao() {
+        int selectedRow = view.getTabelaFuncionarios().getSelectedRow();
+        if (selectedRow != -1) {
+            view.getTxtId().setText(view.getTableModel().getValueAt(selectedRow, 0).toString());
+            view.getTxtNome().setText(view.getTableModel().getValueAt(selectedRow, 1).toString());
+            view.getTxtCPF().setText(view.getTableModel().getValueAt(selectedRow, 2).toString());
+            view.getTxtMatricula().setText(view.getTableModel().getValueAt(selectedRow, 3).toString());
+            view.getTxtCargo().setText(view.getTableModel().getValueAt(selectedRow, 4).toString());
+            view.getTxtSalario().setText(view.getTableModel().getValueAt(selectedRow, 5).toString());
+
+            view.getTxtMatricula().setEditable(false);
+        }
+    }
+
 
 }
