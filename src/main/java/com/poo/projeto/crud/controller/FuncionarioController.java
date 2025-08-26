@@ -99,6 +99,16 @@ public class FuncionarioController {
         }
     }
 
+    private void limparCampos() {
+        view.getTxtId().setText("");
+        view.getTxtNome().setText("");
+        view.getTxtCPF().setText("");
+        view.getTxtMatricula().setText("");
+        view.getTxtCargo().setText("");
+        view.getTxtSalario().setText("");
+
+        view.getTxtMatricula().setEditable(true);
+    }
 
 
 }
