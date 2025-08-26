@@ -18,5 +18,17 @@ public class ProdutoView extends JFrame {
 
     private final JTable tabelaProdutos = new JTable();
     private final DefaultTableModel tableModel;
+
+    public ProdutoView() {
+        super("Cadastro de Produtos");
+
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        setSize(800, 600);
+        setLocationRelativeTo(null);
+
+        String[] colunas = {"Código", "Nome", "Descrição", "Preço", "Estoque"};
+        tableModel = new DefaultTableModel(colunas, 0);
+        tabelaProdutos.setModel(tableModel);
+    }
 }
 
