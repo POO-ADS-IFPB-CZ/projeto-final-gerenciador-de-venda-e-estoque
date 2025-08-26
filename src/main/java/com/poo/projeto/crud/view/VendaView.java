@@ -37,6 +37,17 @@ public class VendaView extends JFrame {
         vendaPanel.add(new JLabel("Funcionário:"));
         vendaPanel.add(comboFuncionario);
         vendaPanel.add(btnSalvarVenda);
+
+
+        JPanel itemPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        itemPanel.setBorder(BorderFactory.createTitledBorder("Adicionar Item"));
+        itemPanel.add(new JLabel("Produto:"));
+        itemPanel.add(comboProduto);
+        itemPanel.add(new JLabel("Quantidade:"));
+        itemPanel.add(txtQuantidade);
+        itemPanel.add(btnAdicionarItem);
+
+
     }
 
 }
