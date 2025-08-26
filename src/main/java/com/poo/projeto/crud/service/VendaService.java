@@ -9,6 +9,7 @@ import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -39,7 +40,7 @@ public class VendaService {
         if(venda.getFuncionario() == null){
             throw new IllegalArgumentException("A venda precisa ter um funcionário associado.");
         }
-
+        Double total = 0.0;
         for(ItemVenda item : venda.getItens()){
             item.setVenda(venda);
 
@@ -51,7 +52,12 @@ public class VendaService {
             }
             produto.setEstoque(produto.getEstoque() - item.getQuantidade());
             produtoRepository.save(produto);
+
+            total = item.getPrecoUnitario() * item.getQuantidade();
         }
+
+        venda.setValorTotal(total);
+        venda.setDataVenda(LocalDate.now());
 
         return vendaRepository.save(venda);
     }
@@ -75,8 +81,6 @@ public class VendaService {
         }
         vendaRepository.deleteById(id);
     }
-
-
 
 
 }

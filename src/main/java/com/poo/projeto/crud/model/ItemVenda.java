@@ -18,10 +18,15 @@ public class ItemVenda {
     @JoinColumn(name = "produto_codigo")
     @ManyToOne
     private Produto produto;
+
+    @JoinColumn(name = "venda_codigo")
     @ManyToOne
     private Venda venda;
 
     private int quantidade;
     private Double precoUnitario;
+
+
+
 
 }

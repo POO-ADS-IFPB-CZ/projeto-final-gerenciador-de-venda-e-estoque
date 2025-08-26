@@ -21,9 +21,13 @@ public class Venda {
     private LocalDate dataVenda;
 
     @ManyToOne
+    @JoinColumn(name = "funcionario_matricula")
     private Funcionario funcionario;
 
-    @OneToMany(mappedBy = "Venda", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "venda", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<ItemVenda> itens;
+
+    private Double valorTotal;
+
 
 }

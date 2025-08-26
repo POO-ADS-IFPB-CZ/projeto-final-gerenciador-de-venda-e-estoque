@@ -27,12 +27,12 @@ public class FuncionarioService {
         try{
             return repository.save(funcionario);
         }catch (DataIntegrityViolationException e){
-            throw new IllegalArgumentException("O Funcionário " + funcionario.getNome() + " - " + funcionario.getMatricula() + " já está cadastrado.");
+            throw new IllegalArgumentException("O Funcionário " + funcionario.getNome() + " - " + funcionario.getId() + " já está cadastrado.");
         }
     }
 
     public Funcionario atualizarFuncionario(Funcionario funcionario){
-        Optional<Funcionario> optionalFuncionario = repository.findById(funcionario.getMatricula());
+        Optional<Funcionario> optionalFuncionario = repository.findById(funcionario.getId());
         if(optionalFuncionario.isPresent()){
             Funcionario funcionarioAtualizado = optionalFuncionario.get();
             funcionarioAtualizado.setNome(funcionario.getNome());
@@ -45,18 +45,12 @@ public class FuncionarioService {
         }
     }
 
-    public void deletarFuncionario(String cpf){
-        if(!repository.existsFuncionarioByCpf(cpf)){
+    public void deletarFuncionario(Long id){
+        if(!repository.existsById(id)){
             throw new RuntimeException("Funcionaŕio não existe!");
         }
-        repository.deleteByCpf(cpf);
+        repository.deleteById(id);
     }
-
-
-
-
-
-
 
 
 }
