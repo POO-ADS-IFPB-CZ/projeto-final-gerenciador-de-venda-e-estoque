@@ -20,7 +20,17 @@ public class FuncionarioView {
     private final JTable tabelaFuncionarios = new JTable();
     private final DefaultTableModel tableModel;
 
+    public FuncionarioView() {
+        super("Gerenciamento de Funcionários");
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        setSize(800, 500);
+        setLocationRelativeTo(null);
 
+        String[] colunas = {"ID", "Nome", "CPF", "Matrícula", "Cargo", "Salário"};
+        tableModel = new DefaultTableModel(colunas, 0);
+        tabelaFuncionarios.setModel(tableModel);
+
+    }
 
 
 }
