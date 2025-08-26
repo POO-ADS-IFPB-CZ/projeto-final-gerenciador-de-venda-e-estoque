@@ -2,6 +2,7 @@ package com.poo.projeto.crud.view;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import java.awt.*;
 
 public class ProdutoView extends JFrame {
 
@@ -29,6 +30,32 @@ public class ProdutoView extends JFrame {
         String[] colunas = {"Código", "Nome", "Descrição", "Preço", "Estoque"};
         tableModel = new DefaultTableModel(colunas, 0);
         tabelaProdutos.setModel(tableModel);
+
+        JPanel formPanel = new JPanel(new GridLayout(6, 2, 5, 5));
+        formPanel.setBorder(BorderFactory.createTitledBorder("Dados do Produto"));
+        formPanel.add(new JLabel("Código"));
+        txtId.setEditable(false);
+        formPanel.add(txtId);
+        formPanel.add(new JLabel("Nome"));
+        formPanel.add(txtNome);
+        formPanel.add(new JLabel("Descrição"));
+        formPanel.add(txtDescricao);
+        formPanel.add(new JLabel("Preço"));
+        formPanel.add(txtPreco);
+        formPanel.add(new JLabel("Estoque"));
+        formPanel.add(txtEstoque);
+
+        JPanel buttonPanel = new JPanel();
+        buttonPanel.add(btnSalvar);
+        buttonPanel.add(btnAtualizar);
+        buttonPanel.add(btnDeletar);
+        buttonPanel.add(btnLimpar);
+
+        setLayout(new BorderLayout(10, 10));
+        add(formPanel, BorderLayout.NORTH);
+        add(new JScrollPane(tabelaProdutos), BorderLayout.CENTER);
+        add(buttonPanel, BorderLayout.SOUTH);
+
     }
 }
 
