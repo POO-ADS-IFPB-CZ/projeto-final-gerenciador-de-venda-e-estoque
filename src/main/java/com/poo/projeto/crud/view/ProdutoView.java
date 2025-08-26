@@ -3,6 +3,7 @@ package com.poo.projeto.crud.view;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
+import java.awt.event.ActionListener;
 
 public class ProdutoView extends JFrame {
 
@@ -55,7 +56,19 @@ public class ProdutoView extends JFrame {
         add(formPanel, BorderLayout.NORTH);
         add(new JScrollPane(tabelaProdutos), BorderLayout.CENTER);
         add(buttonPanel, BorderLayout.SOUTH);
-
     }
+
+    public JTextField getTxtId() { return txtId; }
+    public JTextField getTxtNome() { return txtNome; }
+    public JTextField getTxtDescricao() { return txtDescricao; }
+    public JTextField getTxtPreco() { return txtPreco; }
+    public JTextField getTxtEstoque() { return txtEstoque; }
+    public DefaultTableModel getTableModel() { return tableModel; }
+    public JTable getTabelaProdutos() { return tabelaProdutos; }
+
+    public void addSalvarListener(ActionListener listener) { btnSalvar.addActionListener(listener); }
+    public void addAtualizarListener(ActionListener listener) { btnAtualizar.addActionListener(listener); }
+    public void addDeletarListener(ActionListener listener) { btnDeletar.addActionListener(listener); }
+    public void addLimparListener(ActionListener listener) { btnLimpar.addActionListener(listener); }
 }
 
