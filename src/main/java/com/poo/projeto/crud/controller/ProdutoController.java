@@ -90,6 +90,14 @@ public class ProdutoController {
         }
     }
 
+    private void limparCampos() {
+        view.getTxtId().setText("");
+        view.getTxtNome().setText("");
+        view.getTxtDescricao().setText("");
+        view.getTxtPreco().setText("");
+        view.getTxtEstoque().setText("");
+    }
+
 }
 
 
