@@ -82,5 +82,23 @@ public class FuncionarioController {
         }
     }
 
+    private void deletarFuncionario() {
+        try {
+            int selectedRow = view.getTabelaFuncionarios().getSelectedRow();
+            if (selectedRow == -1) {
+                JOptionPane.showMessageDialog(view, "Selecione um funcionário para deletar.");
+                return;
+            }
+            Long id = (Long) view.getTableModel().getValueAt(selectedRow, 0);
+            funcionarioService.deletarFuncionario(id);
+            carregarTabela();
+            limparCampos();
+            JOptionPane.showMessageDialog(view, "Funcionário deletado com sucesso!");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(view, "Erro ao deletar o funcionário: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+
 
 }
