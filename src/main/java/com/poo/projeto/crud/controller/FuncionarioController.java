@@ -15,6 +15,14 @@ public class FuncionarioController {
     public FuncionarioController(FuncionarioView view, FuncionarioService funcionarioService) {
         this.view = view;
         this.funcionarioService = funcionarioService;
+
+        this.view.addSalvarListener(e -> salvarFuncionario());
+        this.view.addAtualizarListener(e -> atualizarFuncionario());
+        this.view.addDeletarListener(e -> deletarFuncionario());
+        this.view.addLimparListener(e -> limparCampos());
+        this.view.getTabelaFuncionarios().getSelectionModel().addListSelectionListener(e -> preencherCamposComSelecao());
+
+        carregarTabela();
     }
 
     private void carregarTabela() {
