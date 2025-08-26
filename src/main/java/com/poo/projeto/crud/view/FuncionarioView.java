@@ -2,6 +2,7 @@ package com.poo.projeto.crud.view;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import java.awt.*;
 
 public class FuncionarioView {
 
@@ -29,6 +30,32 @@ public class FuncionarioView {
         String[] colunas = {"ID", "Nome", "CPF", "Matrícula", "Cargo", "Salário"};
         tableModel = new DefaultTableModel(colunas, 0);
         tabelaFuncionarios.setModel(tableModel);
+
+        JPanel formPanel = new JPanel(new GridLayout(7, 4, 7, 7));
+        formPanel.setBorder(BorderFactory.createTitledBorder("Dados do Funcionário"));
+        formPanel.add(new JLabel("ID:"));
+        txtId.setEditable(false);
+        formPanel.add(txtId);
+        formPanel.add(new JLabel("Nome:"));
+        formPanel.add(txtNome);
+        formPanel.add(new JLabel("CPF:"));
+        formPanel.add(txtCPF);
+        formPanel.add(new JLabel("Matrícula:"));
+        formPanel.add(txtMatricula);
+        formPanel.add(new JLabel("Cargo:"));
+        formPanel.add(txtCargo);
+        formPanel.add(new JLabel("Salário:"));
+        formPanel.add(txtSalario);
+
+        JPanel buttonPanel = new JPanel();
+        buttonPanel.add(btnSalvar);
+        buttonPanel.add(btnAtualizar);
+        buttonPanel.add(btnDeletar);
+        buttonPanel.add(btnLimpar);
+
+        add(formPanel, BorderLayout.NORTH);
+        add(new JScrollPane(tabelaFuncionarios), BorderLayout.CENTER);
+        add(buttonPanel, BorderLayout.SOUTH);
 
     }
 
