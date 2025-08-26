@@ -12,8 +12,18 @@ public class ProdutoController {
     private final ProdutoView view;
     private final ProdutoService produtoService;
 
+    public ProdutoController(ProdutoView view, ProdutoService produtoService) {
+        this.view = view;
+        this.produtoService = produtoService;
 
+        this.view.addSalvarListener(e -> salvarProduto());
+        this.view.addAtualizarListener(e -> atualizarProduto());
+        this.view.addDeletarListener(e -> deletarProduto());
+        this.view.addLimparListener(e -> limparCampos());
+        this.view.getTabelaProdutos().getSelectionModel().addListSelectionListener(e -> preencherCamposComSelecao());
 
+        carregarTabela();
+    }
 
     private void carregarTabela() {
         view.getTableModel().setRowCount(0);
