@@ -98,6 +98,18 @@ public class ProdutoController {
         view.getTxtEstoque().setText("");
     }
 
+    private void preencherCamposComSelecao() {
+        int selectedRow = view.getTabelaProdutos().getSelectedRow();
+        if (selectedRow != -1) {
+            view.getTxtId().setText(view.getTableModel().getValueAt(selectedRow, 0).toString());
+            view.getTxtNome().setText(view.getTableModel().getValueAt(selectedRow, 1).toString());
+
+            view.getTxtDescricao().setText(view.getTableModel().getValueAt(selectedRow, 2).toString());
+            view.getTxtPreco().setText(view.getTableModel().getValueAt(selectedRow, 3).toString());
+            view.getTxtEstoque().setText(view.getTableModel().getValueAt(selectedRow, 4).toString());
+        }
+    }
+
 }
 
 
