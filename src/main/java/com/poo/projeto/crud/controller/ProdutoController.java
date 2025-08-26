@@ -4,6 +4,7 @@ import com.poo.projeto.crud.model.Produto;
 import com.poo.projeto.crud.service.ProdutoService;
 import com.poo.projeto.crud.view.ProdutoView;
 
+import javax.swing.*;
 import java.util.List;
 
 public class ProdutoController {
@@ -24,6 +25,30 @@ public class ProdutoController {
             });
         }
     }
+
+    private void salvarProduto() {
+        if (!view.getTxtId().getText().isEmpty()) {
+            JOptionPane.showMessageDialog(view, "Para alterar um produto existente, use o botão 'Atualizar'.", "Ação Inválida", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        try {
+            Produto produto = new Produto();
+            produto.setNome(view.getTxtNome().getText());
+            produto.setDescricao(view.getTxtDescricao().getText());
+            produto.setPreco(Double.parseDouble(view.getTxtPreco().getText()));
+            produto.setEstoque(Integer.parseInt(view.getTxtEstoque().getText()));
+
+            produtoService.salvarProduto(produto);
+
+            carregarTabela();
+            limparCampos();
+            JOptionPane.showMessageDialog(view, "Produto salvo com sucesso!");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(view, "Erro ao salvar o produto: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
 }
 
 
