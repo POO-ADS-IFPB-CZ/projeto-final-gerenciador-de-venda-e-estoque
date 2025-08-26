@@ -51,6 +51,36 @@ public class FuncionarioController {
             JOptionPane.showMessageDialog(view, "Erro ao salvar funcionário: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
         }
     }
+    private void atualizarFuncionario() {
+
+        if (view.getTxtId().getText().isEmpty()) {
+            JOptionPane.showMessageDialog(view, "Selecione um funcionário na tabela para atualizar.", "Ação Inválida", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        try {
+            Funcionario funcionario = new Funcionario();
+
+
+            funcionario.setId(Long.parseLong(view.getTxtId().getText()));
+            funcionario.setMatricula(view.getTxtMatricula().getText());
+
+
+            funcionario.setNome(view.getTxtNome().getText());
+            funcionario.setCpf(view.getTxtCPF().getText());
+            funcionario.setCargo(view.getTxtCargo().getText());
+            funcionario.setSalario(Double.parseDouble(view.getTxtSalario().getText()));
+
+
+            funcionarioService.atualizarFuncionario(funcionario);
+
+            carregarTabela();
+            limparCampos();
+            JOptionPane.showMessageDialog(view, "Funcionário atualizado com sucesso!");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(view, "Erro ao atualizar funcionário: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+        }
+    }
 
 
 }
