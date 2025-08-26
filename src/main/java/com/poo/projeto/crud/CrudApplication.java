@@ -1,16 +1,15 @@
 package com.poo.projeto.crud;
 
 
-import com.poo.projeto.crud.controler.FuncionarioController;
-import com.poo.projeto.crud.controler.ProdutoController;
-import com.poo.projeto.crud.controler.VendaController;
+import com.poo.projeto.crud.controller.FuncionarioController;
+import com.poo.projeto.crud.controller.ProdutoController;
+import com.poo.projeto.crud.controller.VendaController;
 import com.poo.projeto.crud.service.FuncionarioService;
 import com.poo.projeto.crud.service.ProdutoService;
 import com.poo.projeto.crud.service.VendaService;
 import com.poo.projeto.crud.view.FuncionarioView;
 import com.poo.projeto.crud.view.ProdutoView;
 import com.poo.projeto.crud.view.VendaView;
-import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.ConfigurableApplicationContext;

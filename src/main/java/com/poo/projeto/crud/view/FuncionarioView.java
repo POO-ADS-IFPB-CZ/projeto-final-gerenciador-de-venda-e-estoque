@@ -5,7 +5,7 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionListener;
 
-public class FuncionarioView {
+public class FuncionarioView extends JFrame{
 
     private final JTextField txtId = new JTextField(5);
     private final JTextField txtNome = new JTextField(20);
@@ -24,6 +24,7 @@ public class FuncionarioView {
 
     public FuncionarioView() {
         super("Gerenciamento de Funcionários");
+
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setSize(800, 500);
         setLocationRelativeTo(null);
