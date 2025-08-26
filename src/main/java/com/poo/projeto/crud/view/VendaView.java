@@ -47,6 +47,21 @@ public class VendaView extends JFrame {
         itemPanel.add(txtQuantidade);
         itemPanel.add(btnAdicionarItem);
 
+        topPanel.add(vendaPanel);
+        topPanel.add(itemPanel);
+        add(topPanel, BorderLayout.NORTH);
+
+        String[] colunasItens = {"ID Prod.", "Nome", "Preço Unitário", "Quantidade", "Subtotal"};
+        itensTableModel = new DefaultTableModel(colunasItens, 0);
+        tabelaItensVenda.setModel(itensTableModel);
+
+        add(new JScrollPane(tabelaItensVenda), BorderLayout.CENTER);
+
+        JPanel totalPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+        totalPanel.add(lblTotal);
+        add(totalPanel, BorderLayout.SOUTH);
+
+
 
     }
 
