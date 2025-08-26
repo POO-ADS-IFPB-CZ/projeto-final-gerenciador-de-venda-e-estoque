@@ -49,6 +49,30 @@ public class ProdutoController {
         }
     }
 
+    private void atualizarProduto() {
+        if (view.getTxtId().getText().isEmpty()) {
+            JOptionPane.showMessageDialog(view, "Selecione um produto na tabela para atualizar.", "Ação Inválida", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        try {
+            Produto produto = new Produto();
+            produto.setCodigo(Long.parseLong(view.getTxtId().getText()));
+            produto.setNome(view.getTxtNome().getText());
+            produto.setDescricao(view.getTxtDescricao().getText());
+            produto.setPreco(Double.parseDouble(view.getTxtPreco().getText()));
+            produto.setEstoque(Integer.parseInt(view.getTxtEstoque().getText()));
+
+            produtoService.atualizarProduto(produto);
+
+            carregarTabela();
+            limparCampos();
+            JOptionPane.showMessageDialog(view, "Produto atualizado com sucesso!");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(view, "Erro ao atualizar o produto: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
 }
 
 
