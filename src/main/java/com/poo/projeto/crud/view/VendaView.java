@@ -20,6 +20,8 @@ public class VendaView extends JFrame {
 
     private final JLabel lblTotal = new JLabel("Total: R$ 0.00");
 
+    private final JButton btnListarVendas = new JButton("Listar Vendas");
+
 
 
     public VendaView() {
@@ -37,6 +39,8 @@ public class VendaView extends JFrame {
         vendaPanel.add(new JLabel("Funcionário:"));
         vendaPanel.add(comboFuncionario);
         vendaPanel.add(btnSalvarVenda);
+
+        vendaPanel.add(btnListarVendas);
 
 
         JPanel itemPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
@@ -72,7 +76,9 @@ public class VendaView extends JFrame {
 
     public void addSalvarVendaListener(ActionListener listener) { btnSalvarVenda.addActionListener(listener); }
     public void addAdicionarItemListener(ActionListener listener) { btnAdicionarItem.addActionListener(listener); }
-
+    public void addListarVendasListener(ActionListener listener) {
+        btnListarVendas.addActionListener(listener);
+    }
 }
 
 

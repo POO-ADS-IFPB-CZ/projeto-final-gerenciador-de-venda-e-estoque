@@ -10,6 +10,7 @@ import com.poo.projeto.crud.service.VendaService;
 import com.poo.projeto.crud.view.VendaView;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -35,6 +36,7 @@ public class VendaController {
 
         this.view.addSalvarVendaListener(e -> salvarVenda());
         this.view.addAdicionarItemListener(e -> adicionarItem());
+        this.view.addListarVendasListener(e -> listarVendas());
 
         carregarDadosIniciais();
         atualizarTotal();
@@ -116,6 +118,40 @@ public class VendaController {
             resetarFormulario();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(view, "Erro ao salvar a venda: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    private void listarVendas() {
+        try {
+            List<Venda> vendas = vendaService.ListarVendas();
+
+            JDialog dialog = new JDialog(view, "Lista de Vendas Realizadas", true);
+            dialog.setSize(600, 400);
+            dialog.setLocationRelativeTo(view);
+
+
+            String[] colunas = {"ID Venda", "Funcionário", "Data", "Total"};
+            DefaultTableModel tableModel = new DefaultTableModel(colunas, 0);
+            JTable tabelaVendas = new JTable(tableModel);
+
+
+            for (Venda venda : vendas) {
+                Object[] rowData = {
+                        venda.getCodigo(),
+                        venda.getFuncionario().getNome(),
+                        venda.getDataVenda(),
+                        venda.getValorTotal()
+                };
+                tableModel.addRow(rowData);
+            }
+
+
+            dialog.add(new JScrollPane(tabelaVendas));
+
+            dialog.setVisible(true);
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(view, "Erro ao listar vendas: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
         }
     }
 
