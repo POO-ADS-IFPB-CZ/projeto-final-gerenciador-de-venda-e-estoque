@@ -1,4 +1,4 @@
-package com.poo.projeto.crud.controler;
+package com.poo.projeto.crud.controller;
 
 import com.poo.projeto.crud.model.Funcionario;
 import com.poo.projeto.crud.model.ItemVenda;
@@ -39,6 +39,103 @@ public class VendaController {
         carregarDadosIniciais();
         atualizarTotal();
     }
+
+    private void carregarDadosIniciais() {
+        try {
+            funcionarios = funcionarioService.listarFuncionarios();
+            produtos = produtoService.listarProdutos();
+
+            for (Funcionario f : funcionarios) {
+                view.getComboFuncionario().addItem(f.getNome());
+            }
+            for (Produto p : produtos) {
+                view.getComboProduto().addItem(p.getNome());
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(view, "Erro ao carregar dados: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    private void adicionarItem() {
+        try {
+            int selectedProductIndex = view.getComboProduto().getSelectedIndex();
+            if (selectedProductIndex == -1) {
+                JOptionPane.showMessageDialog(view, "Selecione um produto.");
+                return;
+            }
+
+            Produto produtoSelecionado = produtos.get(selectedProductIndex);
+            int quantidade = Integer.parseInt(view.getTxtQuantidade().getText());
+
+            ItemVenda item = new ItemVenda();
+            item.setProduto(produtoSelecionado);
+            item.setQuantidade(quantidade);
+            item.setPrecoUnitario(produtoSelecionado.getPreco());
+
+            itensDaVendaAtual.add(item);
+
+            double subtotal = item.getPrecoUnitario() * item.getQuantidade();
+            view.getItensTableModel().addRow(new Object[]{
+                    produtoSelecionado.getCodigo(),
+                    produtoSelecionado.getNome(),
+                    item.getPrecoUnitario(),
+                    item.getQuantidade(),
+                    subtotal
+            });
+
+            atualizarTotal();
+        } catch (NumberFormatException nfe) {
+            JOptionPane.showMessageDialog(view, "Quantidade inválida.", "Erro", JOptionPane.ERROR_MESSAGE);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(view, "Erro ao adicionar item: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    private void salvarVenda() {
+        try {
+            if (itensDaVendaAtual.isEmpty()) {
+                JOptionPane.showMessageDialog(view, "Adicione pelo menos um item ao carrinho.");
+                return;
+            }
+
+            Venda novaVenda = new Venda();
+            ItemVenda item = new ItemVenda();
+
+            int selectedFuncIndex = view.getComboFuncionario().getSelectedIndex();
+            Funcionario funcionarioSelecionado = funcionarios.get(selectedFuncIndex);
+            novaVenda.setFuncionario(funcionarioSelecionado);
+
+            novaVenda.setItens(itensDaVendaAtual);
+
+
+            vendaService.cadastrarVenda(novaVenda);
+
+
+            JOptionPane.showMessageDialog(view, "Venda salva com sucesso!");
+
+            resetarFormulario();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(view, "Erro ao salvar a venda: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    private void resetarFormulario() {
+        itensDaVendaAtual.clear();
+        view.getItensTableModel().setRowCount(0);
+        view.getTxtQuantidade().setText("");
+        view.getComboProduto().setSelectedIndex(0);
+        view.getComboFuncionario().setSelectedIndex(0);
+        atualizarTotal();
+    }
+
+    private void atualizarTotal() {
+        double total = 0;
+        for (ItemVenda item : itensDaVendaAtual) {
+            total += item.getPrecoUnitario() * item.getQuantidade();
+        }
+        view.getLblTotal().setText(String.format("Total: R$ %.2f", total));
+    }
+
 
 
 
