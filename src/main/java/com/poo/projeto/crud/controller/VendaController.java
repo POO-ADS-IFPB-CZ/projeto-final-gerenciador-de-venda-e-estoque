@@ -37,6 +37,7 @@ public class VendaController {
         this.view.addSalvarVendaListener(e -> salvarVenda());
         this.view.addAdicionarItemListener(e -> adicionarItem());
         this.view.addListarVendasListener(e -> listarVendas());
+        this.view.addDeletarVendaListener(e -> deletarVenda());
 
         carregarDadosIniciais();
         atualizarTotal();
@@ -152,6 +153,30 @@ public class VendaController {
 
         } catch (Exception e) {
             JOptionPane.showMessageDialog(view, "Erro ao listar vendas: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    private void deletarVenda() {
+        String idStr = JOptionPane.showInputDialog(
+                view,
+                "Digite o ID da venda que deseja deletar:",
+                "Deletar Venda",
+                JOptionPane.QUESTION_MESSAGE
+        );
+
+        if (idStr != null && !idStr.trim().isEmpty()) {
+            try {
+                Long id = Long.parseLong(idStr);
+                vendaService.deletarVenda(id);
+
+                JOptionPane.showMessageDialog(view, "Venda deletada com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(view, "ID inválido. Por favor, digite apenas números.", "Erro de Formato", JOptionPane.ERROR_MESSAGE);
+
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(view, "Erro ao deletar a venda: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+            }
         }
     }
 
